@@ -1,0 +1,19 @@
+theme: minima
+title: Arxiv Export
+email: gzileni@hotmail.com
+description: >-
+  A Python library for exporting research papers from arXiv
+version: 0.1.0
+
+github_username:  gzileni
+linkedin_username: gzileni
+
+plugins:
+ - jekyll-feed
+ - jekyll-seo-tag
+
+social:
+  - icon: fab fa-github
+    link: https://github.com/gzileni/arxiv-export-documents
+  - icon: fab fa-linkedin
+    link: https://www.linkedin.com/in/gzileni
