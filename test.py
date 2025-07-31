@@ -1,19 +1,18 @@
-from arxiv_export import export_papers
+import asyncio
+from arxiv_export_documents import export_papers
 
 
-def main():
+async def main():
     search_query = "quantum computing"
     download_path = "./arxiv_papers"
     max_results = 5
 
-    papers = export_papers(
+    async for paper in export_papers(
         search=search_query,
         path_download=download_path,
         max_results=max_results
-    )
-
-    for paper in papers:
-        print(f"Title: {paper.title}")
+    ):
+        print(f"Downloaded paper: {paper.title}")
         print(f"Authors: {', '.join(paper.authors)}")
         print(f"Summary: {paper.summary}")
         print(f"Link: {paper.link}")
@@ -23,4 +22,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())
