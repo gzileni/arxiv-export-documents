@@ -134,14 +134,16 @@ def _download_paper(paper: ArxivPaper, path_download: str) -> str:
     return filename
 
 
-def export_papers(
+async def export_papers(
     search: str,
     path_download: str,
     max_results: int = 5,
     **kwargs
-) -> list[ArxivPaper]:
+):
     """
     Export papers from arXiv based on a search query.
+    Asynchronously fetches paper details, downloads PDFs,
+    and creates documents.
     :param search: Search query string.
     :param max_results: Maximum number of results to return.
     :return: List of dictionaries containing paper details.
@@ -179,4 +181,4 @@ def export_papers(
         # Create documents from the downloaded PDF
         docs = _create_documents(paper, filename, **kwargs)
         paper.set_documents(docs)
-    return papers
+        yield paper
