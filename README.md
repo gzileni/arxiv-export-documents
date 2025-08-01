@@ -20,7 +20,7 @@ async def main():
     download_path = "./arxiv_papers"
     max_results = 5
 
-    async for paper in export_papers(
+    async for paper, is_exist in export_papers(
         search=search_query,
         path_download=download_path,
         max_results=max_results
