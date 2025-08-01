@@ -182,4 +182,5 @@ async def export_papers(
         # Create documents from the downloaded PDF
         docs = _create_documents(paper, filename, **kwargs)
         paper.set_documents(docs)
-        yield paper, is_exist
+        paper.set_is_exist(is_exist)
+        yield paper

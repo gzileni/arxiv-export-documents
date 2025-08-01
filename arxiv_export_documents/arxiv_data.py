@@ -12,6 +12,7 @@ class ArxivPaper:
     authors: list[str]
     path: str
     documents: list[Document]
+    is_exist: bool
 
     def __init__(self, title, summary, arxiv_id, link, authors):
         self.title = title
@@ -19,6 +20,13 @@ class ArxivPaper:
         self.arxiv_id = arxiv_id
         self.link = link
         self.authors = authors
+
+    def set_is_exist(self, is_exist: bool):
+        """
+        Set the existence status of the paper.
+        :param is_exist: Boolean indicating if the paper already exists.
+        """
+        self.is_exist = is_exist
 
     def set_path(self, path):
         """

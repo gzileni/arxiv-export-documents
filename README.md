@@ -20,7 +20,7 @@ async def main():
     download_path = "./arxiv_papers"
     max_results = 5
 
-    async for paper, is_exist in export_papers(
+    async for paper in export_papers(
         search=search_query,
         path_download=download_path,
         max_results=max_results
@@ -31,6 +31,7 @@ async def main():
         print(f"Link: {paper.link}")
         print(f"Path: {paper.path}")
         print(f"Documents: {len(paper.documents)}")
+        print(f"Exists: {paper.is_exist}")
         print("-" * 80)
 
 
