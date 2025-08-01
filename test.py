@@ -3,7 +3,7 @@ from arxiv_export_documents import export_papers
 
 
 async def main():
-    search_query = "quantum computing"
+    search_query = "Spaces where all bijections are morphisms"
     download_path = "./arxiv_papers"
     max_results = 5
 
