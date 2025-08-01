@@ -103,7 +103,7 @@ def _create_documents(
     return docs
 
 
-def _download_paper(paper: ArxivPaper, path_download: str) -> str:
+def _download_paper(paper: ArxivPaper, path_download: str) -> tuple[str, bool]:
     """
     Download the PDF file of the paper.
     :param paper: ArxivPaper object containing paper details.
@@ -124,14 +124,14 @@ def _download_paper(paper: ArxivPaper, path_download: str) -> str:
         # Load the PDF and set documents
         loader = PyPDFLoader(filename)
         paper.set_documents(loader.load())
-        return filename
+        return filename, True
 
     with open(filename, 'wb') as f:
         for chunk in response.iter_content(chunk_size=8192):
             if chunk:
                 f.write(chunk)
 
-    return filename
+    return filename, False
 
 
 async def export_papers(
@@ -170,15 +170,16 @@ async def export_papers(
         # Download the PDF file
         if not paper.link:
             continue
+
         # Download the PDF file
         if not path_download.endswith('/'):
             path_download += '/'
 
         # Download the paper and set the local path
-        filename = _download_paper(paper, path_download)
+        filename, is_exist = _download_paper(paper, path_download)
         paper.set_path(os.path.join(path_download, filename))
 
         # Create documents from the downloaded PDF
         docs = _create_documents(paper, filename, **kwargs)
         paper.set_documents(docs)
-        yield paper
+        yield paper, is_exist
